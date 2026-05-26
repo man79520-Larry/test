@@ -1,0 +1,1167 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>iPhone 維修價格表</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000000;
+      --panel: #1f1f22;
+      --panel-2: #2a2a2f;
+      --panel-3: #34343a;
+      --line: rgba(255, 255, 255, 0.14);
+      --line-strong: rgba(255, 255, 255, 0.24);
+      --text: rgba(255, 255, 255, 0.96);
+      --muted: rgba(255, 255, 255, 0.58);
+      --muted-2: rgba(255, 255, 255, 0.40);
+      --blue: #0a84ff;
+      --blue-2: #2f9bff;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(65, 74, 96, 0.18), transparent 42%),
+        linear-gradient(180deg, #050505 0%, #000 42%, #030303 100%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      padding: 48px 24px 56px;
+    }
+
+    .page {
+      max-width: 1480px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 18px 16px 34px;
+      animation: fadeUp 700ms ease-out both;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(48px, 5vw, 86px);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -0.045em;
+    }
+
+    .hero p {
+      margin: 18px auto 0;
+      max-width: 960px;
+      font-size: clamp(20px, 2vw, 31px);
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.92);
+      letter-spacing: 0.01em;
+    }
+
+    .panel {
+      margin-top: 16px;
+      background: linear-gradient(180deg, rgba(39, 39, 43, 0.98), rgba(28, 28, 31, 0.98));
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+      animation: fadeUp 900ms 80ms ease-out both;
+    }
+
+    .panel-inner {
+      padding: clamp(28px, 4vw, 56px);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(34px, 2.8vw, 60px);
+      line-height: 1.08;
+      font-weight: 700;
+      margin: 24px 0 34px;
+      letter-spacing: -0.04em;
+    }
+
+    .selector-area {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .control {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .control::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
+    }
+
+    .control:focus-within::after {
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.32),
+        0 0 0 3px rgba(10, 132, 255, 0.95);
+    }
+
+    .field-label {
+      position: absolute;
+      left: 18px;
+      top: 12px;
+      color: var(--muted-2);
+      font-size: 15px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    select {
+      width: 100%;
+      border: 0;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: linear-gradient(180deg, rgba(55, 55, 60, 0.96), rgba(45, 45, 50, 0.96));
+      color: var(--text);
+      border-radius: 18px;
+      padding: 36px 56px 16px 18px;
+      font-size: clamp(20px, 1.7vw, 28px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+    }
+
+    select:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .chevron {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      border-right: 3px solid rgba(255, 255, 255, 0.38);
+      border-bottom: 3px solid rgba(255, 255, 255, 0.38);
+      transform: translateY(10px) rotate(45deg);
+      pointer-events: none;
+    }
+
+    .assist-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px auto 0;
+      color: var(--blue);
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: 500;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .assist-link:hover {
+      color: var(--blue-2);
+    }
+
+    .assist-link span {
+      font-size: 24px;
+      line-height: 1;
+      transform: translateY(-1px);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+      margin-top: 22px;
+    }
+
+    .summary {
+      margin-top: 6px;
+    }
+
+    .summary-head {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 18px;
+      letter-spacing: 0.01em;
+    }
+
+    .service-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .service-label {
+      color: rgba(255, 255, 255, 0.94);
+    }
+
+    .service-price {
+      color: rgba(255, 255, 255, 0.96);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      justify-self: end;
+    }
+
+    .service-row.is-x .service-label,
+    .service-row.is-x .service-price {
+      color: rgba(255, 255, 255, 0.46);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: rgba(255, 255, 255, 0.56);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      padding: 34px 0 10px;
+    }
+
+    .cta {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 22px 34px;
+      min-width: 280px;
+      background: linear-gradient(180deg, #0a84ff, #0672e6);
+      color: white;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      box-shadow:
+        0 16px 32px rgba(10, 132, 255, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow:
+        0 18px 36px rgba(10, 132, 255, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    .cta:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .small-print {
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.50);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1100px) {
+      body { padding: 28px 16px 36px; }
+      .selector-area { max-width: 100%; }
+    }
+
+    @media (max-width: 760px) {
+      .hero { padding-bottom: 22px; }
+      .panel-inner { padding: 24px 16px 28px; }
+      .section-title { margin-top: 16px; }
+      select { font-size: 18px; }
+      .assist-link { font-size: 16px; }
+      .assist-link span { font-size: 20px; }
+      .cta { min-width: 100%; width: 100%; font-size: 18px; padding: 18px 24px; }
+      .small-print { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>[i]Store 維修 需要多少費用？</h1>
+      <p>了解直接由 [i]Store 提供一些常見維修服務需要多少費用。</p>
+    </section>
+
+    <section class="panel" aria-label="iPhone 維修價格表">
+      <div class="panel-inner">
+        <h2 class="section-title">選擇你的裝置</h2>
+
+        <div class="selector-area">
+          <div class="control">
+            <div class="field-label">裝置類型</div>
+            <select id="familySelect" aria-label="裝置類型"></select>
+            <div class="chevron" aria-hidden="true"></div>
+          </div>
+
+          <div class="control">
+            <div class="field-label">機型</div>
+            <select id="modelSelect" aria-label="機型"></select>
+            <div class="chevron" aria-hidden="true"></div>
+          </div>
+
+          <a class="assist-link" href="#" id="assistLink" aria-label="協助辨識你的機型">
+            協助辨識你的機型 <span aria-hidden="true">›</span>
+          </a>
+        </div>
+
+        <div class="content-grid">
+          <div class="summary">
+            <div class="summary-head">估計維修服務費用</div>
+            <ul class="service-list" id="serviceList" aria-label="估計維修服務費用"></ul>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="cta" type="button">取得維修服務</button>
+        </div>
+
+        <div class="small-print">
+          *我們需要檢查你的產品，以提供個人化的估價。實際價格以你提供的價格表為主，並依最終機型與維修項目顯示。
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const data = {
+      "iPhone 17 Pro Max": {
+        family: "iPhone 17",
+        whole: "29,800",
+        battery: "4,150",
+        screen: "13,790",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,200",
+        frame: "11,700",
+        logicBoard: "13,200",
+        truedepth: "6,500",
+        rearCamera: "9,100",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "3,400",
+        taptic: "3,290",
+      },
+      "iPhone 17 Pro": {
+        family: "iPhone 17",
+        whole: "28,200",
+        battery: "4,150",
+        screen: "12,090",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,090",
+        frame: "11,700",
+        logicBoard: "13,200",
+        truedepth: "6,500",
+        rearCamera: "9,100",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "3,400",
+        taptic: "3,290",
+      },
+      "iPhone 17": {
+        family: "iPhone 17",
+        whole: "21,500",
+        battery: "3,350",
+        screen: "12,090",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,090",
+        frame: "9,200",
+        logicBoard: "11,790",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "3,400",
+        taptic: "3,290",
+      },
+      "iPhone 17e": {
+        family: "iPhone 17",
+        whole: "16,900",
+        battery: "3,350",
+        screen: "9,390",
+        backSystem: "X",
+        middleSystem: "12,400",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,200",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,100",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "3,400",
+        taptic: "3,290",
+      },
+      "iPhone Air": {
+        family: "iPhone Air",
+        whole: "24,900",
+        battery: "4,150",
+        screen: "12,090",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,090",
+        frame: "11,700",
+        logicBoard: "13,200",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "X",
+        receiver: "3,400",
+        mainParts: "4,400",
+        taptic: "3,290",
+      },
+      "iPhone 16 Pro Max": {
+        family: "iPhone 16",
+        whole: "27,900",
+        battery: "4,150",
+        screen: "13,790",
+        backSystem: "X",
+        middleSystem: "18,690",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,200",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "9,100",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "5,900",
+        taptic: "3,290",
+      },
+      "iPhone 16 Pro": {
+        family: "iPhone 16",
+        whole: "22,800",
+        battery: "4,150",
+        screen: "12,090",
+        backSystem: "X",
+        middleSystem: "16,900",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,090",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "9,100",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "5,900",
+        taptic: "3,290",
+      },
+      "iPhone 16 Plus": {
+        family: "iPhone 16",
+        whole: "21,400",
+        battery: "3,350",
+        screen: "12,090",
+        backSystem: "X",
+        middleSystem: "15,000",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,090",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "5,900",
+        taptic: "3,290",
+      },
+      "iPhone 16": {
+        family: "iPhone 16",
+        whole: "19,300",
+        battery: "3,350",
+        screen: "10,090",
+        backSystem: "X",
+        middleSystem: "13,490",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,200",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "5,900",
+        taptic: "3,290",
+      },
+      "iPhone 16e": {
+        family: "iPhone 16",
+        whole: "16,900",
+        battery: "3,350",
+        screen: "9,390",
+        backSystem: "X",
+        middleSystem: "12,400",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,200",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,100",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "3,400",
+        taptic: "3,290",
+      },
+      "iPhone 15 Pro Max": {
+        family: "iPhone 15",
+        whole: "24,900",
+        battery: "3,350",
+        screen: "13,500",
+        backSystem: "X",
+        middleSystem: "18,690",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,200",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "9,100",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 15 Pro": {
+        family: "iPhone 15",
+        whole: "22,800",
+        battery: "3,350",
+        screen: "11,890",
+        backSystem: "X",
+        middleSystem: "16,900",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,090",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "7,700",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 15 Plus": {
+        family: "iPhone 15",
+        whole: "21,400",
+        battery: "3,350",
+        screen: "11,890",
+        backSystem: "X",
+        middleSystem: "15,000",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,090",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 15": {
+        family: "iPhone 15",
+        whole: "19,300",
+        battery: "3,350",
+        screen: "9,890",
+        backSystem: "X",
+        middleSystem: "13,490",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,200",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 14 Pro Max": {
+        family: "iPhone 14",
+        whole: "24,900",
+        battery: "3,350",
+        screen: "12,900",
+        backSystem: "18,800",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "7,700",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 14 Pro": {
+        family: "iPhone 14",
+        whole: "22,800",
+        battery: "3,350",
+        screen: "11,300",
+        backSystem: "17,000",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "7,700",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 14 Plus": {
+        family: "iPhone 14",
+        whole: "21,400",
+        battery: "3,350",
+        screen: "11,300",
+        backSystem: "X",
+        middleSystem: "15,000",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,090",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 14": {
+        family: "iPhone 14",
+        whole: "18,300",
+        battery: "3,350",
+        screen: "9,400",
+        backSystem: "X",
+        middleSystem: "13,490",
+        backGlass: "5,690",
+        backGlassPlusScreen: "3,200",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 13 Pro Max": {
+        family: "iPhone 13",
+        whole: "21,400",
+        battery: "2,990",
+        screen: "11,300",
+        backSystem: "17,000",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "6,390",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 13 Pro": {
+        family: "iPhone 13",
+        whole: "18,300",
+        battery: "2,990",
+        screen: "9,400",
+        backSystem: "15,190",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "6,390",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 13": {
+        family: "iPhone 13",
+        whole: "15,000",
+        battery: "2,990",
+        screen: "9,400",
+        backSystem: "11,600",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 13 Mini": {
+        family: "iPhone 13",
+        whole: "14,400",
+        battery: "2,990",
+        screen: "7,590",
+        backSystem: "9,800",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "6,500",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "3,400",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 12 Pro Max": {
+        family: "iPhone 12",
+        whole: "21,400",
+        battery: "2,990",
+        screen: "11,300",
+        backSystem: "17,000",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "6,390",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 12 Pro": {
+        family: "iPhone 12",
+        whole: "18,300",
+        battery: "2,990",
+        screen: "9,400",
+        backSystem: "15,000",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "6,390",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 12": {
+        family: "iPhone 12",
+        whole: "16,000",
+        battery: "2,990",
+        screen: "9,400",
+        backSystem: "11,500",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 12 Mini": {
+        family: "iPhone 12",
+        whole: "14,400",
+        battery: "2,990",
+        screen: "7,590",
+        backSystem: "9,700",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "5,900",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 11 Pro Max": {
+        family: "iPhone 11",
+        whole: "21,400",
+        battery: "2,990",
+        screen: "11,300",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "4,900",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 11 Pro": {
+        family: "iPhone 11",
+        whole: "18,300",
+        battery: "2,990",
+        screen: "9,400",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "4,900",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 11": {
+        family: "iPhone 11",
+        whole: "14,400",
+        battery: "2,990",
+        screen: "6,790",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "3,800",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone XS Max": {
+        family: "iPhone XR",
+        whole: "21,400",
+        battery: "2,990",
+        screen: "11,300",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "3,800",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone XS": {
+        family: "iPhone XR",
+        whole: "18,300",
+        battery: "2,990",
+        screen: "9,400",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "3,800",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone X": {
+        family: "iPhone XR",
+        whole: "18,300",
+        battery: "2,990",
+        screen: "9,400",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "X",
+        rearCamera: "3,800",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone XR": {
+        family: "iPhone XR",
+        whole: "14,400",
+        battery: "2,990",
+        screen: "6,790",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "5,690",
+        rearCamera: "3,800",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 8 Plus": {
+        family: "iPhone SE",
+        whole: "14,400",
+        battery: "2,290",
+        screen: "6,090",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "X",
+        rearCamera: "4,200",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 8": {
+        family: "iPhone SE",
+        whole: "13,400",
+        battery: "2,290",
+        screen: "5,300",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "X",
+        rearCamera: "3,390",
+        speaker: "X",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone 7 Plus": {
+        family: "iPhone SE",
+        whole: "13,400",
+        battery: "2,290",
+        screen: "6,090",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "X",
+        rearCamera: "4,200",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "4,100",
+      },
+      "iPhone 7": {
+        family: "iPhone SE",
+        whole: "10,600",
+        battery: "2,290",
+        screen: "5,300",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "X",
+        rearCamera: "3,390",
+        speaker: "3,400",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "4,100",
+      },
+      "iPhone SE 2nd": {
+        family: "iPhone SE",
+        whole: "10,600",
+        battery: "2,290",
+        screen: "4,700",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "X",
+        rearCamera: "3,390",
+        speaker: "X",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+      "iPhone SE 3rd": {
+        family: "iPhone SE",
+        whole: "10,500",
+        battery: "2,290",
+        screen: "4,700",
+        backSystem: "X",
+        middleSystem: "X",
+        backGlass: "X",
+        backGlassPlusScreen: "X",
+        frame: "X",
+        logicBoard: "X",
+        truedepth: "X",
+        rearCamera: "3,390",
+        speaker: "X",
+        receiver: "X",
+        mainParts: "X",
+        taptic: "3,290",
+      },
+    };
+
+    const families = [
+      "iPhone Air",
+      "iPhone 17",
+      "iPhone 16",
+      "iPhone 15",
+      "iPhone 14",
+      "iPhone 13",
+      "iPhone 12",
+      "iPhone 11",
+      "iPhone XR",
+      "iPhone SE",
+    ];
+
+    const familySelect = document.getElementById("familySelect");
+    const modelSelect = document.getElementById("modelSelect");
+    const serviceList = document.getElementById("serviceList");
+    const assistLink = document.getElementById("assistLink");
+
+    for (const family of families) {
+      const option = document.createElement("option");
+      option.value = family;
+      option.textContent = family;
+      familySelect.appendChild(option);
+    }
+
+    function formatCell(value) {
+      return `<span class="money">NT$${value}</span>`;
+    }
+
+    function renderModelOptions(family, preferredModel) {
+      const models = Object.entries(data)
+        .filter(([, entry]) => entry.family === family)
+        .map(([model]) => model);
+      modelSelect.innerHTML = "";
+      for (const model of models) {
+        const option = document.createElement("option");
+        option.value = model;
+        option.textContent = model;
+        modelSelect.appendChild(option);
+      }
+      const chosen = preferredModel && models.includes(preferredModel) ? preferredModel : models[0];
+      modelSelect.value = chosen || "";
+      modelSelect.disabled = models.length === 0;
+    }
+
+    function renderServices(selectedModel) {
+      const entry = data[selectedModel];
+      if (!entry) {
+        serviceList.innerHTML = "";
+        return;
+      }
+
+      const rows = [
+        { key: "whole", label: "整機交換", value: entry.whole },
+        { key: "battery", label: "Battery 電池", value: entry.battery },
+        { key: "screen", label: "螢幕交換", value: entry.screen },
+        { key: "backSystem", label: "背面系統", value: entry.backSystem },
+        { key: "middleSystem", label: "中間系統", value: entry.middleSystem },
+        { key: "backGlass", label: "背面玻璃", value: entry.backGlass },
+        { key: "backGlassPlusScreen", label: "背面玻璃 (附加螢幕價格)", value: entry.backGlassPlusScreen },
+        { key: "frame", label: "機殼 (17/Air需報電池)", value: entry.frame },
+        { key: "logicBoard", label: "主機板", value: entry.logicBoard },
+        { key: "truedepth", label: "TrueDepth Camera", value: entry.truedepth },
+        { key: "rearCamera", label: "Camera 背面相機", value: entry.rearCamera },
+        { key: "speaker", label: "Speaker 揚聲器", value: entry.speaker },
+        { key: "receiver", label: "Receiver 聽筒", value: entry.receiver },
+        { key: "mainParts", label: "主麥克風 (AIR為雙mic留意)", value: entry.mainParts },
+        { key: "taptic", label: "TapticEngine 觸感引擎", value: entry.taptic },
+      ];
+
+      serviceList.innerHTML = rows.map((row) => `
+        <li class="service-row ${row.value === "X" ? "is-x" : ""}" data-key="${row.key}">
+          <span class="service-label">${row.label}</span>
+          <span class="service-price">${row.value === "X" ? "X" : formatCell(row.value)}</span>
+        </li>
+      `).join("");
+    }
+
+    function syncUI() {
+      const family = familySelect.value;
+      const model = modelSelect.value;
+      const preferred = data[model] && data[model].family === family ? model : null;
+      renderModelOptions(family, preferred);
+      const activeModel = modelSelect.value;
+      renderServices(activeModel);
+    }
+
+    familySelect.addEventListener("change", syncUI);
+    modelSelect.addEventListener("change", () => {
+      renderServices(modelSelect.value);
+    });
+
+    assistLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      alert("這裡可以接你的機型辨識頁面或說明連結。");
+    });
+
+    familySelect.value = "iPhone 17";
+    renderModelOptions("iPhone 17", "iPhone 17 Pro Max");
+    renderServices("iPhone 17 Pro Max");
+  </script>
+</body>
+</html>
