@@ -1075,6 +1075,11 @@
       "iPhone SE",
     ];
 
+    const familyLabels = {
+      "iPhone XR": "iPhone X系列",
+      "iPhone SE": "iPhone 7/8/SE",
+    };
+
     const familySelect = document.getElementById("familySelect");
     const modelSelect = document.getElementById("modelSelect");
     const serviceList = document.getElementById("serviceList");
@@ -1083,7 +1088,7 @@
     for (const family of families) {
       const option = document.createElement("option");
       option.value = family;
-      option.textContent = family;
+      option.textContent = familyLabels[family] || family;
       familySelect.appendChild(option);
     }
 
